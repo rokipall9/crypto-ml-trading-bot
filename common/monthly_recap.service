@@ -1,0 +1,8 @@
+[Unit]
+Description=Monthly performance recap
+
+[Service]
+Type=oneshot
+User=ubuntu
+WorkingDirectory=/home/ubuntu/common
+ExecStart=/usr/bin/python3 /home/ubuntu/common/monthly_recap.py

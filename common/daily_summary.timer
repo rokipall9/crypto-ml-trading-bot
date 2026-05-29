@@ -1,0 +1,9 @@
+[Unit]
+Description=Fire daily_summary every day at 23:00 UTC
+
+[Timer]
+OnCalendar=*-*-* 23:00:00 UTC
+Persistent=true
+
+[Install]
+WantedBy=timers.target

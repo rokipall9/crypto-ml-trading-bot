@@ -1,0 +1,8 @@
+[Unit]
+Description=Regenerate status.html
+
+[Service]
+Type=oneshot
+User=ubuntu
+WorkingDirectory=/home/ubuntu/common
+ExecStart=/usr/bin/python3 /home/ubuntu/common/status_page.py

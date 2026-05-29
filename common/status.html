@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="refresh" content="60">
+<title>Pro Signal Bot · Live Status</title>
+<style>
+  body {
+    background: #0F1115; color: #E5E7EB;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    margin: 0; padding: 24px; line-height: 1.5;
+  }
+  .container { max-width: 980px; margin: 0 auto; }
+  h1 {
+    font-size: 28px; margin: 0 0 8px;
+    color: #FFD700; letter-spacing: -0.5px;
+  }
+  .sub { color: #9CA3AF; font-size: 13px; margin-bottom: 32px; }
+  .grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px; margin-bottom: 24px;
+  }
+  .card {
+    background: #16191F; border: 1px solid #222731; border-radius: 10px;
+    padding: 18px;
+  }
+  .label { color: #9CA3AF; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .value { color: #FFD700; font-size: 22px; font-weight: 600; }
+  .value.green { color: #00C851; }
+  .value.red { color: #FF4444; }
+  .value.blue { color: #5865F2; }
+  table {
+    width: 100%; border-collapse: collapse; background: #16191F;
+    border: 1px solid #222731; border-radius: 10px; overflow: hidden;
+  }
+  th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #222731; }
+  th { background: #0F1115; color: #9CA3AF; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+  td { font-family: monospace; font-size: 13px; color: #E5E7EB; }
+  .green { color: #00C851; }
+  .red { color: #FF4444; }
+  .muted { color: #9CA3AF; }
+  .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 4px;
+    font-size: 11px; font-weight: 600;
+  }
+  .badge.active { background: #00C851; color: #0F1115; }
+  .badge.stopped { background: #6b7280; color: #fff; }
+  footer { margin-top: 32px; color: #6b7280; font-size: 12px; text-align: center; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>📊 Pro Signal Bot · Live Status</h1>
+  <div class="sub">Auto-refresh every 60 seconds · Last regenerated: <strong>2026-05-29 15:35 UTC</strong></div>
+
+  <h2 style="font-size:16px;color:#E5E7EB;margin:24px 0 12px;">🤖 Services</h2>
+  <table>
+    <thead><tr><th>Service</th><th>Status</th><th>Uptime</th></tr></thead>
+    <tbody>
+      <tr><td>cryptobot.service</td><td><span class="badge active">ACTIVE</span></td><td>Sun 2026-05-24 12:1</td></tr>
+      <tr><td>daily_signal.service</td><td><span class="badge active">ACTIVE</span></td><td>Sat 2026-05-23 00:4</td></tr>
+      <tr><td>forward_tracker.timer</td><td><span class="badge active">ACTIVE</span></td><td>Sat 2026-05-23 00:4</td></tr>
+      <tr><td>weekly_report.timer</td><td><span class="badge active">ACTIVE</span></td><td>Sat 2026-05-23 00:4</td></tr>
+      <tr><td>monthly_recap.timer</td><td><span class="badge active">ACTIVE</span></td><td>Sat 2026-05-23 00:4</td></tr>
+      <tr><td>convergence_monitor.timer</td><td><span class="badge active">ACTIVE</span></td><td>Sat 2026-05-23 00:4</td></tr>
+      <tr><td>health_monitor.timer</td><td><span class="badge active">ACTIVE</span></td><td>Sat 2026-05-23 00:4</td></tr>
+      <tr><td>daily_summary.timer</td><td><span class="badge active">ACTIVE</span></td><td>Sat 2026-05-23 00:4</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="font-size:16px;color:#E5E7EB;margin:32px 0 12px;">📋 Forward-Test Track Record</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="label">Trades resolved</div>
+      <div class="value">50</div>
+    </div>
+    <div class="card">
+      <div class="label">Win rate</div>
+      <div class="value red">2.0%</div>
+    </div>
+    <div class="card">
+      <div class="label">Total R</div>
+      <div class="value green">+9.11R</div>
+    </div>
+    <div class="card">
+      <div class="label">Mode</div>
+      <div class="value blue">PAPER</div>
+    </div>
+  </div>
+
+  <h2 style="font-size:16px;color:#E5E7EB;margin:32px 0 12px;">📈 Per-Strategy Performance</h2>
+  <table>
+    <thead><tr><th>Strategy</th><th>Trades</th><th>Win Rate</th><th>Total R</th></tr></thead>
+    <tbody>
+      <tr><td>?/SMC_CONFLUENCE_SHORT</td><td>11</td><td>0%</td><td class='green'>+4.25R</td></tr>
+      <tr><td>?/SMC_CONFLUENCE</td><td>37</td><td>0%</td><td class='green'>+2.75R</td></tr>
+      <tr><td>daily_signal/A</td><td>2</td><td>50%</td><td class='green'>+2.11R</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="font-size:16px;color:#E5E7EB;margin:32px 0 12px;">📅 Recent Alerts (last 10)</h2>
+  <table>
+    <thead><tr><th>Time</th><th>Bot</th><th>System</th><th>Status</th><th>R</th></tr></thead>
+    <tbody>
+      <tr><td>2026-05-28T14:07</td><td>?</td><td>SMC_CONFLUENCE</td><td class='red'>SL</td><td class='red'>-1.00R</td></tr>
+      <tr><td>2026-05-28T03:19</td><td>?</td><td>SMC_CONFLUENCE</td><td class='red'>SL</td><td class='red'>-1.00R</td></tr>
+      <tr><td>2026-05-27T21:45</td><td>?</td><td>SMC_CONFLUENCE</td><td class='red'>SL</td><td class='red'>-1.00R</td></tr>
+      <tr><td>2026-05-27T18:13</td><td>?</td><td>SMC_CONFLUENCE</td><td class='red'>SL</td><td class='red'>-1.00R</td></tr>
+      <tr><td>2026-05-27T13:09</td><td>?</td><td>SMC_CONFLUENCE</td><td class='red'>SL</td><td class='red'>-1.00R</td></tr>
+      <tr><td>2026-05-26T14:25</td><td>?</td><td>SMC_CONFLUENCE_SHORT</td><td class='red'>SL</td><td class='red'>-1.00R</td></tr>
+      <tr><td>2026-05-26T00:39</td><td>?</td><td>SMC_CONFLUENCE_SHORT</td><td class='muted'>TP1</td><td class='muted'>+2.50R</td></tr>
+      <tr><td>2026-05-25T14:25</td><td>?</td><td>SMC_CONFLUENCE_SHORT</td><td class='red'>SL</td><td class='red'>-1.00R</td></tr>
+      <tr><td>2026-05-25T09:35</td><td>?</td><td>SMC_CONFLUENCE_SHORT</td><td class='red'>SL</td><td class='red'>-1.00R</td></tr>
+      <tr><td>2026-05-24T14:13</td><td>?</td><td>SMC_CONFLUENCE</td><td class='red'>SL</td><td class='red'>-1.00R</td></tr>
+    </tbody>
+  </table>
+
+  <footer>
+    Pro Signal Bot · Educational only — not financial advice<br>
+    BTCUSDT 4H trend / 1H entry · paper / dry-run mode<br>
+    <span class="muted">Page auto-regenerates · API: alerts via Discord webhooks · backtest validated walk-forward</span>
+  </footer>
+</div>
+</body>
+</html>

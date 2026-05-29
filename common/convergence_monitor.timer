@@ -1,0 +1,9 @@
+[Unit]
+Description=Run convergence_monitor every hour
+
+[Timer]
+OnCalendar=hourly
+Persistent=true
+
+[Install]
+WantedBy=timers.target

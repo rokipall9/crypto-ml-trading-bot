@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SRS · Status</title>
+<style>
+:root{
+  --bg:#0F1115; --panel:#16191F; --grid:#222731;
+  --fg:#E5E7EB; --dim:#9CA3AF;
+  --green:#00C851; --red:#FF4444; --gold:#FFD700;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--fg);font:14px/1.5 -apple-system,Segoe UI,sans-serif}
+body{padding:24px;max-width:880px;margin:0 auto}
+h1{font-size:28px;margin-bottom:6px}
+.sub{color:var(--dim);font-size:14px;margin-bottom:24px}
+.banner{padding:16px 20px;border-radius:10px;margin-bottom:24px;font-weight:600;font-size:16px}
+.banner.healthy   {background:rgba(0,200,81,.15);  color:var(--green); border:1px solid var(--green)}
+.banner.degraded  {background:rgba(255,215,0,.15); color:var(--gold);  border:1px solid var(--gold)}
+.banner.unhealthy {background:rgba(255,68,68,.15); color:var(--red);   border:1px solid var(--red)}
+section{background:var(--panel);border:1px solid var(--grid);border-radius:10px;padding:18px;margin-bottom:14px}
+.row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--grid)}
+.row:last-child{border-bottom:0}
+.name{font-weight:500}
+.detail{color:var(--dim);font-size:12px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;vertical-align:middle}
+.dot.green{background:var(--green)} .dot.red{background:var(--red)} .dot.gold{background:var(--gold)}
+.metric{display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;font-weight:600;background:var(--grid);color:var(--dim)}
+footer{color:var(--dim);font-size:12px;text-align:center;margin-top:24px}
+footer a{color:#5865F2;text-decoration:none}
+.live{display:inline-block;width:8px;height:8px;background:var(--green);border-radius:50%;animation:pulse 2s infinite;margin-right:6px}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+</style>
+</head>
+<body>
+
+<h1>📊 System Status</h1>
+<p class="sub"><span class="live"></span>Live · auto-refresh 60s · <span id="updated">…</span></p>
+
+<div class="banner" id="banner">Checking…</div>
+
+<section>
+  <h2 style="font-size:13px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Subsystems</h2>
+  <div id="checks"></div>
+</section>
+
+<section>
+  <h2 style="font-size:13px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Performance</h2>
+  <div id="perf"></div>
+</section>
+
+<footer>
+  <a href="/">Dashboard</a>  ·  <a href="/api/v1/stats">JSON API</a>  ·  <a href="/metrics">Metrics</a>
+</footer>
+
+<script>
+const $ = sel => document.querySelector(sel);
+
+async function refresh() {
+  let banner = $('#banner');
+  let checks = $('#checks');
+  let perf = $('#perf');
+
+  try {
+    const r = await fetch('/health/check');
+    const d = await r.json();
+    const s = d.status || 'unknown';
+    banner.className = 'banner ' + s;
+    banner.textContent = ({
+      healthy:   '✅ All systems operational',
+      degraded:  '⚠️  Degraded — partial functionality',
+      unhealthy: '🔴 Unhealthy — investigating',
+    }[s] || '⏳ Status unknown');
+
+    const order = ['bot_heartbeat','ledger_writable','disk_space','webhook_queue','tokens_file'];
+    const labels = {
+      bot_heartbeat:   'Bot heartbeat',
+      ledger_writable: 'Track-record ledger',
+      disk_space:      'Disk space',
+      webhook_queue:   'Alert delivery queue',
+      tokens_file:     'Auth subsystem',
+    };
+    checks.innerHTML = order.map(k => {
+      const c = (d.checks||{})[k] || {};
+      const ok = c.ok;
+      const detail = ok
+        ? Object.entries(c).filter(([k])=>k!=='ok').map(([k,v])=>`${k}=${v}`).join('  ·  ')
+        : (c.err || 'failing');
+      return `<div class="row">
+        <div><span class="dot ${ok?'green':'red'}"></span><span class="name">${labels[k]||k}</span></div>
+        <div class="detail">${detail.slice(0,80)}</div>
+      </div>`;
+    }).join('');
+  } catch (e) {
+    banner.className = 'banner unhealthy';
+    banner.textContent = '🔴 Cannot reach API';
+  }
+
+  try {
+    const m = await fetch('/metrics').then(r=>r.text());
+    const get = (regex) => {
+      const m2 = m.match(regex);
+      return m2 ? Number(m2[1]) : null;
+    };
+    const uptime = get(/^srs_uptime_seconds (\d+\.?\d*)/m);
+    const trades = get(/^srs_trades_total (\d+)/m);
+    const wr = get(/^srs_win_rate (\d+\.?\d*)/m);
+    const totR = get(/^srs_total_r (-?\d+\.?\d*)/m);
+    const reqs = get(/^srs_http_requests_total (\d+)/m);
+    perf.innerHTML = `
+      <div class="row"><div class="name">Uptime</div>
+        <div><span class="metric">${uptime?fmtUptime(uptime):'—'}</span></div></div>
+      <div class="row"><div class="name">Total resolved trades</div>
+        <div><span class="metric">${trades ?? '—'}</span></div></div>
+      <div class="row"><div class="name">Win rate</div>
+        <div><span class="metric">${wr!=null?wr.toFixed(1)+'%':'—'}</span></div></div>
+      <div class="row"><div class="name">Total R</div>
+        <div><span class="metric">${totR!=null?(totR>=0?'+':'')+totR.toFixed(2):'—'}</span></div></div>
+      <div class="row"><div class="name">HTTP requests served</div>
+        <div><span class="metric">${reqs?reqs.toLocaleString():'—'}</span></div></div>`;
+  } catch (e) {
+    perf.innerHTML = '<div class="detail">Metrics unavailable</div>';
+  }
+
+  $('#updated').textContent = new Date().toLocaleTimeString();
+}
+
+function fmtUptime(s) {
+  if (s < 60) return `${Math.floor(s)}s`;
+  if (s < 3600) return `${Math.floor(s/60)}m`;
+  if (s < 86400) return `${Math.floor(s/3600)}h ${Math.floor((s%3600)/60)}m`;
+  return `${Math.floor(s/86400)}d ${Math.floor((s%86400)/3600)}h`;
+}
+
+refresh();
+setInterval(refresh, 60000);
+</script>
+</body>
+</html>

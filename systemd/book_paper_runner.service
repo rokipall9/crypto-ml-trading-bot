@@ -1,0 +1,7 @@
+[Unit]
+Description=SMC Book Strategies — live paper runner
+[Service]
+Type=oneshot
+User=ubuntu
+EnvironmentFile=-/home/ubuntu/bot/.env
+ExecStart=/usr/bin/python3 /home/ubuntu/common/book_paper_runner.py

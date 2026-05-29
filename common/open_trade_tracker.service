@@ -1,0 +1,6 @@
+[Unit]
+Description=Open trade live tracker
+[Service]
+Type=oneshot
+User=ubuntu
+ExecStart=/usr/bin/python3 /home/ubuntu/common/open_trade_tracker.py

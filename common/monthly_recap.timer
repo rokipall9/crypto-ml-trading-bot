@@ -1,0 +1,9 @@
+[Unit]
+Description=Fire monthly_recap on the 1st of each month at 23:30 UTC
+
+[Timer]
+OnCalendar=*-*-01 23:30:00 UTC
+Persistent=true
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,6 @@
+[Unit]
+Description=Daily audit hash transparency post
+[Service]
+Type=oneshot
+User=ubuntu
+ExecStart=/usr/bin/python3 /home/ubuntu/common/audit_hash.py

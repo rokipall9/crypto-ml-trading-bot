@@ -1,0 +1,8 @@
+[Unit]
+Description=Morning briefing (one-shot)
+
+[Service]
+Type=oneshot
+User=ubuntu
+WorkingDirectory=/home/ubuntu/common
+ExecStart=/usr/bin/python3 /home/ubuntu/common/morning_briefing.py

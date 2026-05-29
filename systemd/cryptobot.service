@@ -1,0 +1,18 @@
+[Unit]
+Description=SMC Crypto Signal Bot
+After=network.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu/bot
+ExecStart=/usr/bin/python3 -u run_bot.py
+Restart=always
+RestartSec=10
+TimeoutStartSec=60
+Environment=PYTHONUNBUFFERED=1
+StandardOutput=append:/home/ubuntu/bot/logs/bot_live.log
+StandardError=append:/home/ubuntu/bot/logs/bot_live.log
+
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,7 @@
+[Unit]
+Description=Run spread_monitor every 30 min
+[Timer]
+OnCalendar=*:0/30
+Persistent=true
+[Install]
+WantedBy=timers.target

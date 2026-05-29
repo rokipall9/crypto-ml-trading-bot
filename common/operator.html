@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SRS · Operator Dashboard</title>
+<style>
+:root{
+  --bg:#0F1115; --panel:#16191F; --grid:#222731;
+  --fg:#E5E7EB; --dim:#9CA3AF;
+  --green:#00C851; --red:#FF4444; --gold:#FFD700; --blue:#5865F2;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--fg);font:13px/1.5 -apple-system,Segoe UI,sans-serif}
+body{padding:20px;max-width:1400px;margin:0 auto}
+h1{font-size:24px;color:var(--gold);margin-bottom:4px}
+.sub{color:var(--dim);margin-bottom:20px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-bottom:20px}
+.card{background:var(--panel);border:1px solid var(--grid);border-radius:10px;padding:16px}
+.card .label{color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;font-weight:600}
+.card .value{font-size:24px;font-weight:700}
+section{background:var(--panel);border:1px solid var(--grid);border-radius:10px;padding:16px;margin-bottom:16px}
+section h2{font-size:13px;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th,td{padding:7px 10px;text-align:left;border-bottom:1px solid var(--grid)}
+th{color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.4px}
+.green{color:var(--green)} .red{color:var(--red)} .gold{color:var(--gold)} .dim{color:var(--dim)}
+.muted{color:var(--dim);font-style:italic;text-align:center;padding:14px}
+.bad-status{background:rgba(255,68,68,.15);color:var(--red)}
+.ok-status{background:rgba(0,200,81,.15);color:var(--green)}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.pill{padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;background:var(--grid);color:var(--dim)}
+.auth{background:#1a1d23;border:1px solid var(--grid);padding:14px;border-radius:8px;margin-bottom:16px}
+input{background:var(--bg);border:1px solid var(--grid);color:var(--fg);padding:8px;border-radius:4px;font-family:monospace;width:280px}
+button{background:var(--blue);color:#fff;border:0;padding:8px 14px;border-radius:4px;cursor:pointer;font-weight:600}
+.error{color:var(--red);margin-top:8px;font-size:12px}
+</style>
+</head>
+<body>
+
+<h1>🛡️  Operator Dashboard</h1>
+<p class="sub">Internal control panel · admin tier · HMAC-signed</p>
+
+<div class="auth" id="auth-box">
+  <div class="label" style="color:var(--dim);font-size:11px;margin-bottom:8px">ADMIN TOKEN (tier 2)</div>
+  <input id="token" type="password" placeholder="Bearer token..." autocomplete="off">
+  <button onclick="loadAll()">Load Dashboard</button>
+  <div id="err" class="error"></div>
+</div>
+
+<div id="content" style="display:none">
+
+<section>
+  <h2>📊 Subscription Metrics</h2>
+  <div class="grid" id="subs-grid"></div>
+</section>
+
+<section>
+  <h2>🔄 Recent Auto-Restarts (7d)</h2>
+  <table id="restarts-table">
+    <thead><tr><th>When</th><th>Reason</th><th>Stale Age</th></tr></thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>📋 Audit Log (last 20)</h2>
+  <table id="audit-table">
+    <thead><tr><th>When</th><th>Actor</th><th>Action</th><th>Payload</th></tr></thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>🚫 Active IP Bans</h2>
+  <div id="bans-body"></div>
+</section>
+
+<section>
+  <h2>📨 Webhook Queue</h2>
+  <div class="grid" id="queue-grid"></div>
+</section>
+
+</div>
+
+<script>
+const $ = sel => document.querySelector(sel);
+const fmt = n => Number(n||0).toLocaleString('en-US');
+const cls = n => n>0 ? 'green' : (n<0 ? 'red' : '');
+
+async function hmacSign(secret, method, path, body='') {
+  const ts = Math.floor(Date.now() / 1000).toString();
+  const bodyHash = await sha256Hex(body);
+  const msg = method + "\n" + path + "\n" + ts + "\n" + bodyHash;
+  const key = await crypto.subtle.importKey(
+    "raw", new TextEncoder().encode(secret), {name:"HMAC",hash:"SHA-256"},
+    false, ["sign"]);
+  const sig = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(msg));
+  const hex = Array.from(new Uint8Array(sig))
+    .map(b=>b.toString(16).padStart(2,'0')).join('');
+  return {ts, sig: hex};
+}
+
+async function sha256Hex(s) {
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
+  return Array.from(new Uint8Array(buf))
+    .map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+async function adminFetch(path) {
+  const token = $('#token').value.trim();
+  if (!token) throw new Error("token required");
+  const {ts, sig} = await hmacSign(token, "GET", path);
+  const r = await fetch(path, {
+    headers: {
+      "Authorization": "Bearer " + token,
+      "X-Request-Timestamp": ts,
+      "X-Request-Signature": sig,
+    }
+  });
+  if (!r.ok) throw new Error(`HTTP ${r.status}`);
+  return r.json();
+}
+
+async function loadAll() {
+  $('#err').textContent = '';
+  try {
+    const [subs, audit, restarts, bans, queue] = await Promise.all([
+      adminFetch('/api/admin/subscriptions'),
+      adminFetch('/api/admin/audit'),
+      adminFetch('/api/admin/restarts'),
+      adminFetch('/api/admin/bans'),
+      adminFetch('/api/admin/queue'),
+    ]);
+    $('#content').style.display = '';
+    renderSubs(subs);
+    renderAudit(audit);
+    renderRestarts(restarts);
+    renderBans(bans);
+    renderQueue(queue);
+  } catch (e) {
+    $('#err').textContent = "Error: " + e.message;
+  }
+}
+
+function renderSubs(s) {
+  const cards = [
+    card('Active Subs', fmt(s.active_total)),
+    card('MRR (est)', '$' + fmt(s.mrr_usd_estimate)),
+    card('Net 30d', (s.net_growth_30d>0?'+':'')+fmt(s.net_growth_30d), cls(s.net_growth_30d)),
+    card('Expiring 3d', fmt(s.expiring_within_3d), s.expiring_within_3d>0?'gold':''),
+    card('Active 30d', fmt(s.active_in_last_30d)),
+    card('Avg uses/token', fmt(s.avg_uses_per_token)),
+  ];
+  $('#subs-grid').innerHTML = cards.join('');
+}
+
+function renderRestarts(r) {
+  const tbody = $('#restarts-table tbody');
+  if (!r.entries || !r.entries.length) {
+    tbody.innerHTML = '<tr><td colspan=3 class="muted">No restarts in 7 days ✓</td></tr>';
+    return;
+  }
+  tbody.innerHTML = r.entries.slice(-15).reverse().map(e => `
+    <tr>
+      <td class="dim">${(e.ts||'').slice(0,16).replace('T',' ')}</td>
+      <td>${escapeHtml(e.service||'?')}</td>
+      <td class="red">${fmt(e.stale_age_sec||0)}s</td>
+    </tr>`).join('');
+}
+
+function renderAudit(a) {
+  const tbody = $('#audit-table tbody');
+  const entries = a.entries || [];
+  if (!entries.length) {
+    tbody.innerHTML = '<tr><td colspan=4 class="muted">No audit entries</td></tr>';
+    return;
+  }
+  tbody.innerHTML = entries.slice(-20).reverse().map(r => {
+    const extras = Object.entries(r).filter(([k,v]) =>
+      !['ts','action','actor'].includes(k))
+      .map(([k,v])=>`${k}=${typeof v==='string'?v.slice(0,30):v}`).join(', ');
+    return `
+      <tr>
+        <td class="dim">${(r.ts||'').slice(0,16).replace('T',' ')}</td>
+        <td>${escapeHtml(r.actor||'?')}</td>
+        <td><strong>${escapeHtml(r.action||'?')}</strong></td>
+        <td class="dim">${escapeHtml(extras.slice(0,80))}</td>
+      </tr>`;
+  }).join('');
+}
+
+function renderBans(b) {
+  const bans = b.bans || {};
+  if (!Object.keys(bans).length) {
+    $('#bans-body').innerHTML = '<div class="muted">No active bans</div>';
+    return;
+  }
+  $('#bans-body').innerHTML = '<div class="row">' +
+    Object.entries(bans).map(([ip, secs]) =>
+      `<span class="pill">${escapeHtml(ip)} · ${Math.floor(secs/60)}m${secs%60}s</span>`
+    ).join('') + '</div>';
+}
+
+function renderQueue(q) {
+  $('#queue-grid').innerHTML = [
+    card('Pending', fmt(q.pending), q.pending>10?'gold':''),
+    card('Dead-Letter', fmt(q.dead_letter), q.dead_letter>0?'red':''),
+  ].join('');
+}
+
+function card(label, value, color='') {
+  return `<div class="card"><div class="label">${label}</div><div class="value ${color}">${value}</div></div>`;
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+</script>
+
+</body>
+</html>

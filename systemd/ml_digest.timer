@@ -1,0 +1,10 @@
+[Unit]
+Description=Trigger ML Daily Digest at 00:05 UTC daily
+
+[Timer]
+OnCalendar=*-*-* 00:05:00
+Persistent=true
+RandomizedDelaySec=120
+
+[Install]
+WantedBy=timers.target

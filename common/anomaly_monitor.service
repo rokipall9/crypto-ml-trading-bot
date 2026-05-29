@@ -1,0 +1,6 @@
+[Unit]
+Description=Anomaly monitor (volatility + sentiment)
+[Service]
+Type=oneshot
+User=ubuntu
+ExecStart=/usr/bin/python3 /home/ubuntu/common/anomaly_monitor.py

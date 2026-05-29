@@ -1,0 +1,7 @@
+[Unit]
+Description=Run open_trade_tracker every hour
+[Timer]
+OnCalendar=hourly
+Persistent=true
+[Install]
+WantedBy=timers.target

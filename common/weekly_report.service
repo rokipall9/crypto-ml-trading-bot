@@ -1,0 +1,9 @@
+[Unit]
+Description=Weekly retrospective report (one-shot; run by timer)
+
+[Service]
+Type=oneshot
+User=ubuntu
+WorkingDirectory=/home/ubuntu/daily_signal
+EnvironmentFile=-/home/ubuntu/bot/.env
+ExecStart=/usr/bin/python3 /home/ubuntu/daily_signal/weekly_report.py

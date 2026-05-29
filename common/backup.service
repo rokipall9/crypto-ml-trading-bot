@@ -1,0 +1,6 @@
+[Unit]
+Description=Daily backup of bot state + configs
+[Service]
+Type=oneshot
+User=ubuntu
+ExecStart=/bin/bash /home/ubuntu/common/backup.sh

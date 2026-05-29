@@ -1,0 +1,8 @@
+[Unit]
+Description=Forward-test tracker (one-shot; run by timer)
+
+[Service]
+Type=oneshot
+User=ubuntu
+WorkingDirectory=/home/ubuntu/common
+ExecStart=/usr/bin/python3 /home/ubuntu/common/forward_tracker.py

@@ -1,0 +1,31 @@
+# ---- Secrets / credentials (NEVER commit) ----
+.env
+*.env
+!.env.example
+tokens.json
+token_leases.json
+*.pem
+*.key
+id_rsa*
+
+# ---- Runtime state / server data (not code) ----
+logs/
+bot/logs/
+common/*.json
+bot/bot/*.json
+*.bak.*
+*.bak
+*.jsonl
+
+# ---- Python ----
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.pytest_cache/
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+*.swp

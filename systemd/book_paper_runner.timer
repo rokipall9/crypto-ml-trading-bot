@@ -1,0 +1,8 @@
+[Unit]
+Description=SMC Book Strategies — live paper runner (30s)
+[Timer]
+OnBootSec=30s
+OnUnitActiveSec=30s
+Unit=book_paper_runner.service
+[Install]
+WantedBy=timers.target

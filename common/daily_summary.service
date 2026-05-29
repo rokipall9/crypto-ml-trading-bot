@@ -1,0 +1,8 @@
+[Unit]
+Description=Daily summary recap (one-shot; run by timer)
+
+[Service]
+Type=oneshot
+User=ubuntu
+WorkingDirectory=/home/ubuntu/common
+ExecStart=/usr/bin/python3 /home/ubuntu/common/daily_summary.py

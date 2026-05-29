@@ -1,0 +1,12 @@
+[Unit]
+Description=ML Daily Digest poster to Discord ML channel
+After=network.target
+
+[Service]
+Type=oneshot
+User=ubuntu
+EnvironmentFile=-/home/ubuntu/bot/.env
+WorkingDirectory=/home/ubuntu/common
+ExecStart=/usr/bin/python3 /home/ubuntu/common/ml_digest.py
+StandardOutput=append:/home/ubuntu/bot/logs/ml_digest.log
+StandardError=append:/home/ubuntu/bot/logs/ml_digest.log

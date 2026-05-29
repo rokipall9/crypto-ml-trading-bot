@@ -1,0 +1,10 @@
+[Unit]
+Description=SRS Bot Watchdog Timer (every 2min)
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=2min
+Unit=bot_watchdog.service
+
+[Install]
+WantedBy=timers.target

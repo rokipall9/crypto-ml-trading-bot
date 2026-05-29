@@ -1,0 +1,7 @@
+[Unit]
+Description=SRS Bot Watchdog (one-shot)
+
+[Service]
+Type=oneshot
+User=ubuntu
+ExecStart=/usr/bin/python3 /home/ubuntu/common/bot_watchdog.py

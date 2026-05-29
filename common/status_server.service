@@ -1,0 +1,14 @@
+[Unit]
+Description=Public HTTP status page (port 8080)
+After=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/common
+ExecStart=/usr/bin/python3 /home/ubuntu/common/status_server.py
+Restart=always
+RestartSec=15
+
+[Install]
+WantedBy=multi-user.target
