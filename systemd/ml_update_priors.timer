@@ -1,0 +1,10 @@
+[Unit]
+Description=Trigger ML Bayesian update every Sunday 02:00 UTC
+
+[Timer]
+OnCalendar=Sun *-*-* 02:00:00
+Persistent=true
+RandomizedDelaySec=300
+
+[Install]
+WantedBy=timers.target
