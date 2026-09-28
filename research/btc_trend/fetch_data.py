@@ -80,7 +80,7 @@ def load_minutes() -> tuple[pd.DataFrame, dict]:
     return df, checks
 
 
-def build_daily(df: pd.DataFrame) -> pd.DataFrame:
+def build_daily(df: pd.DataFrame, start: str = DAILY_FROM) -> pd.DataFrame:
     """Daily bar D = minutes stamped in [D 00:00, D+1 00:00) UTC.
 
     Bitstamp stamps a minute candle by its open time, so the candle stamped
@@ -89,7 +89,7 @@ def build_daily(df: pd.DataFrame) -> pd.DataFrame:
     """
     t = pd.to_datetime(df["timestamp"], unit="s")
     m = df.assign(day=t.dt.floor("D"), minute=t.dt.hour * 60 + t.dt.minute)
-    m = m[m["day"] >= pd.Timestamp(DAILY_FROM)]
+    m = m[m["day"] >= pd.Timestamp(start)]
     g = m.groupby("day")
     daily = pd.DataFrame({
         "open": g["open"].first(),
