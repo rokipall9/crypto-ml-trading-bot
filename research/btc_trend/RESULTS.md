@@ -80,3 +80,52 @@ Run `V1_tsmom_multi` (the pre-registered multi-horizon version, less
 dependent on one lookback than `tsmom28`) as a **paper-only** daily signal
 for a fixed period before any real money, and have Codex review this study
 first. Nothing here changes live trading.
+
+---
+
+# Twenty-strategy screen (`SPEC_20.md`, commit 6a4954e)
+
+Twenty textbook strategies across four styles, ranked on **2017–2020**, then
+the top five tested on **2021-01-01 → 2026-09-27**. One hourly engine runs
+them all with the same costs (0.105 %/side, 0.01 %/8h long funding) and
+execution (next :04 minute close). It reproduces the daily engine's holdout
+numbers (tsmom28 0.78, tsmom_multi 0.64, tsmom_multi_vt 0.58).
+
+## Top five (chosen on 2017–2020 only)
+
+| # | strategy | Sharpe 17–20 | Sharpe 21+ | total 21+ | max DD 21+ | trades/yr | gate |
+|---|---|---|---|---|---|---|---|
+| 1 | T6 tsmom_multi_vt | 1.89 | 0.58 | +106 % | −47 % | 15 | fail (p 0.053) |
+| 2 | T4 donchian20_10 | 1.75 | 0.44 | +73 % | −61 % | 8 | fail (DD, p 0.22) |
+| 3 | T2 tsmom_multi | 1.73 | 0.64 | +153 % | −51 % | 16 | fail (p 0.036) |
+| 4 | T3 sma200 | 1.49 | 0.48 | +94 % | −66 % | 5 | fail (DD, p 0.16) |
+| 5 | D5 turn_of_month | 1.48 | 0.17 | +8 % | −48 % | 12 | fail (Sharpe, p 0.39) |
+| — | buy-and-hold perp | 1.32 | 0.42 | +54 % | −79 % | — | — |
+
+**No top-five strategy passes the holdout gate** (control bar p < 0.01). The
+four trend rules still beat buy-and-hold on Sharpe in 2021+; turn-of-month
+did not survive.
+
+## The other fifteen, 2021+ Sharpe
+
+tsmom28 0.78 · golden cross 0.39 · rsi2 0.47 · weekdays 0.17 ·
+vol breakout (trend) 0.05 · 4h Bollinger 0.00 · 4h Donchian −0.01 ·
+panic dip −0.01 · three down −0.03 · vol breakout −0.14 · hourly RSI −0.54 ·
+hourly trend −1.45 · US-open momentum −1.98 · evening −2.47 ·
+last-hour momentum −4.63
+
+## What it says
+
+- **Trading frequency decides survival.** Every strategy trading more than
+  about 50 times a year lost money after costs in 2021+. The worst five
+  trade 180–365 times a year and lost 86–98 %. At 0.105 % per side, a daily
+  round trip costs about 77 % a year before any edge.
+- **Daily trend is the only family positive in both periods.** It is also
+  the family already seen on 2021+ in earlier rounds, so this holdout is not
+  clean for it.
+- **Selection carried over** (Spearman 0.74 between the two periods), mostly
+  because trend is good and intraday is bad in both.
+- `D1_rsi2` (ranked 13th on selection) had 2021+ Sharpe 0.47 with the
+  smallest drawdown of any positive strategy (−31 %). Noticing that in the
+  holdout is itself selection, so it is only a candidate for a future
+  pre-registered test, not a finding.
