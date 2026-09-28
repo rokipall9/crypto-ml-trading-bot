@@ -117,8 +117,8 @@ last-hour momentum −4.63
 ## What it says
 
 - **Trading frequency decides survival.** Every strategy trading more than
-  about 50 times a year lost money after costs in 2021+. The worst five
-  trade 180–365 times a year and lost 86–98 %. At 0.105 % per side, a daily
+  about 50 times a year lost money after costs in 2021+. The four worst
+  trade 180–365 times a year and lost 86–97 %. At 0.105 % per side, a daily
   round trip costs about 77 % a year before any edge.
 - **Daily trend is the only family positive in both periods.** It is also
   the family already seen on 2021+ in earlier rounds, so this holdout is not
