@@ -1,0 +1,375 @@
+{
+  "spec_sha256": "5c61716bd4978ec068cee94afbc32205a3ff7ee34becf7f62d701331c03461a2",
+  "data_last_day": "2026-09-27",
+  "periods": {
+    "reference": {
+      "buy_hold_spot": {
+        "days": 1461,
+        "total_return": 29.0254,
+        "cagr": 1.3395,
+        "vol": 0.8186,
+        "sharpe": 1.454,
+        "max_dd": -0.8332
+      },
+      "buy_hold_perp": {
+        "days": 1461,
+        "total_return": 18.3807,
+        "cagr": 1.0971,
+        "vol": 0.8186,
+        "sharpe": 1.321,
+        "max_dd": -0.8505
+      },
+      "buy_hold_perp_yearly": {
+        "2017": 11.7974,
+        "2018": -0.7605,
+        "2019": 0.7385,
+        "2020": 2.6373
+      },
+      "C1_sma200": {
+        "days": 1461,
+        "total_return": 20.1602,
+        "cagr": 1.1436,
+        "vol": 0.6593,
+        "sharpe": 1.486,
+        "max_dd": -0.6809,
+        "time_in_market": 0.62,
+        "avg_exposure": 0.62,
+        "round_trips": 9,
+        "trip_win_rate": 0.444,
+        "avg_win": 2.0152,
+        "avg_loss": -0.0771,
+        "yearly": {
+          "2017": 11.8105,
+          "2018": -0.5562,
+          "2019": 0.4526,
+          "2020": 1.5622
+        }
+      },
+      "C2_donchian20_10": {
+        "days": 1461,
+        "total_return": 20.1565,
+        "cagr": 1.1436,
+        "vol": 0.5074,
+        "sharpe": 1.754,
+        "max_dd": -0.4703,
+        "time_in_market": 0.431,
+        "avg_exposure": 0.431,
+        "round_trips": 30,
+        "trip_win_rate": 0.633,
+        "avg_win": 0.2592,
+        "avg_loss": -0.0781,
+        "yearly": {
+          "2017": 6.6419,
+          "2018": -0.3421,
+          "2019": 0.8269,
+          "2020": 1.3034
+        }
+      },
+      "C3_tsmom28": {
+        "days": 1461,
+        "total_return": 12.786,
+        "cagr": 0.926,
+        "vol": 0.6028,
+        "sharpe": 1.387,
+        "max_dd": -0.7613,
+        "time_in_market": 0.593,
+        "avg_exposure": 0.593,
+        "round_trips": 53,
+        "trip_win_rate": 0.264,
+        "avg_win": 0.5474,
+        "avg_loss": -0.0582,
+        "yearly": {
+          "2017": 5.0709,
+          "2018": -0.6298,
+          "2019": 0.4054,
+          "2020": 3.3646
+        }
+      },
+      "C4_ensemble": {
+        "days": 1461,
+        "total_return": 19.9294,
+        "cagr": 1.1378,
+        "vol": 0.5344,
+        "sharpe": 1.688,
+        "max_dd": -0.6387,
+        "time_in_market": 0.78,
+        "avg_exposure": 0.548,
+        "round_trips": 27,
+        "trip_win_rate": 0.222,
+        "avg_win": 1.4755,
+        "avg_loss": -0.0291,
+        "yearly": {
+          "2017": 7.8229,
+          "2018": -0.5026,
+          "2019": 0.5835,
+          "2020": 2.0116
+        }
+      }
+    },
+    "test": {
+      "buy_hold_spot": {
+        "days": 2095,
+        "total_return": 1.901,
+        "cagr": 0.2039,
+        "vol": 0.5782,
+        "sharpe": 0.61,
+        "max_dd": -0.7655
+      },
+      "buy_hold_perp": {
+        "days": 2095,
+        "total_return": 0.5473,
+        "cagr": 0.079,
+        "vol": 0.5782,
+        "sharpe": 0.42,
+        "max_dd": -0.7922
+      },
+      "buy_hold_perp_yearly": {
+        "2021": 0.427,
+        "2022": -0.6802,
+        "2023": 1.2992,
+        "2024": 0.9763,
+        "2025": -0.1604,
+        "2026": -0.1113
+      },
+      "C1_sma200": {
+        "days": 2095,
+        "total_return": 0.9452,
+        "cagr": 0.1229,
+        "vol": 0.4246,
+        "sharpe": 0.484,
+        "max_dd": -0.6602,
+        "time_in_market": 0.549,
+        "avg_exposure": 0.549,
+        "round_trips": 27,
+        "trip_win_rate": 0.259,
+        "avg_win": 0.2527,
+        "avg_loss": -0.0386,
+        "yearly": {
+          "2021": -0.2759,
+          "2022": 0.0,
+          "2023": 0.7777,
+          "2024": 0.6485,
+          "2025": -0.2351,
+          "2026": 0.1985
+        },
+        "control": {
+          "p": 0.155,
+          "shift_sharpe_median": 0.244,
+          "shift_sharpe_p95": 0.745
+        }
+      },
+      "C2_donchian20_10": {
+        "days": 2095,
+        "total_return": 0.7332,
+        "cagr": 0.1006,
+        "vol": 0.3617,
+        "sharpe": 0.445,
+        "max_dd": -0.606,
+        "time_in_market": 0.407,
+        "avg_exposure": 0.407,
+        "round_trips": 47,
+        "trip_win_rate": 0.362,
+        "avg_win": 0.1754,
+        "avg_loss": -0.0655,
+        "yearly": {
+          "2021": 0.0749,
+          "2022": -0.4357,
+          "2023": 0.7708,
+          "2024": 0.5446,
+          "2025": 0.0802,
+          "2026": -0.0329
+        },
+        "control": {
+          "p": 0.222,
+          "shift_sharpe_median": 0.18,
+          "shift_sharpe_p95": 0.784
+        }
+      },
+      "C3_tsmom28": {
+        "days": 2095,
+        "total_return": 2.7928,
+        "cagr": 0.2614,
+        "vol": 0.4014,
+        "sharpe": 0.777,
+        "max_dd": -0.4706,
+        "time_in_market": 0.538,
+        "avg_exposure": 0.538,
+        "round_trips": 91,
+        "trip_win_rate": 0.374,
+        "avg_win": 0.1148,
+        "avg_loss": -0.0349,
+        "yearly": {
+          "2021": 1.1059,
+          "2022": -0.4,
+          "2023": 1.5147,
+          "2024": 0.4433,
+          "2025": -0.1969,
+          "2026": 0.0299
+        },
+        "control": {
+          "p": 0.015,
+          "shift_sharpe_median": 0.206,
+          "shift_sharpe_p95": 0.617
+        }
+      },
+      "C4_ensemble": {
+        "days": 2095,
+        "total_return": 1.5623,
+        "cagr": 0.1781,
+        "vol": 0.3556,
+        "sharpe": 0.637,
+        "max_dd": -0.5161,
+        "time_in_market": 0.75,
+        "avg_exposure": 0.498,
+        "round_trips": 59,
+        "trip_win_rate": 0.237,
+        "avg_win": 0.1579,
+        "avg_loss": -0.0195,
+        "yearly": {
+          "2021": 0.2202,
+          "2022": -0.2916,
+          "2023": 1.0121,
+          "2024": 0.5668,
+          "2025": -0.1189,
+          "2026": 0.0671
+        },
+        "control": {
+          "p": 0.064,
+          "shift_sharpe_median": 0.253,
+          "shift_sharpe_p95": 0.673
+        }
+      }
+    }
+  },
+  "sensitivity": {
+    "test_sharpe_funding_primary": {
+      "buy_hold_perp": 0.42,
+      "C1_sma200": 0.484,
+      "C2_donchian20_10": 0.445,
+      "C3_tsmom28": 0.777,
+      "C4_ensemble": 0.637
+    },
+    "test_sharpe_funding_zero": {
+      "buy_hold_perp": 0.61,
+      "C1_sma200": 0.626,
+      "C2_donchian20_10": 0.568,
+      "C3_tsmom28": 0.924,
+      "C4_ensemble": 0.79
+    },
+    "test_sharpe_funding_high": {
+      "buy_hold_perp": 0.042,
+      "C1_sma200": 0.201,
+      "C2_donchian20_10": 0.199,
+      "C3_tsmom28": 0.484,
+      "C4_ensemble": 0.33
+    }
+  },
+  "small_account": {
+    "$257": {
+      "C1_sma200": {
+        "start_equity": 257.0,
+        "end_equity": 506.23,
+        "return": 0.9698,
+        "max_dd": -0.6388,
+        "orders": 53,
+        "entries_skipped_below_lot": 0
+      },
+      "C2_donchian20_10": {
+        "start_equity": 257.0,
+        "end_equity": 442.17,
+        "return": 0.7205,
+        "max_dd": -0.5662,
+        "orders": 93,
+        "entries_skipped_below_lot": 0
+      },
+      "C3_tsmom28": {
+        "start_equity": 257.0,
+        "end_equity": 944.93,
+        "return": 2.6768,
+        "max_dd": -0.4593,
+        "orders": 181,
+        "entries_skipped_below_lot": 0
+      },
+      "C4_ensemble": {
+        "start_equity": 257.0,
+        "end_equity": 711.73,
+        "return": 1.7694,
+        "max_dd": -0.4433,
+        "orders": 296,
+        "entries_skipped_below_lot": 0
+      }
+    },
+    "$2,650": {
+      "C1_sma200": {
+        "start_equity": 2650.0,
+        "end_equity": 4974.11,
+        "return": 0.877,
+        "max_dd": -0.6693,
+        "orders": 53,
+        "entries_skipped_below_lot": 0
+      },
+      "C2_donchian20_10": {
+        "start_equity": 2650.0,
+        "end_equity": 4599.4,
+        "return": 0.7356,
+        "max_dd": -0.6055,
+        "orders": 93,
+        "entries_skipped_below_lot": 0
+      },
+      "C3_tsmom28": {
+        "start_equity": 2650.0,
+        "end_equity": 10052.19,
+        "return": 2.7933,
+        "max_dd": -0.4723,
+        "orders": 181,
+        "entries_skipped_below_lot": 0
+      },
+      "C4_ensemble": {
+        "start_equity": 2650.0,
+        "end_equity": 6757.86,
+        "return": 1.5501,
+        "max_dd": -0.5119,
+        "orders": 296,
+        "entries_skipped_below_lot": 0
+      }
+    }
+  },
+  "verdict": {
+    "C1_sma200": {
+      "checks": {
+        "sharpe_gt_bh_perp": true,
+        "dd_le_0.7x_bh_perp": false,
+        "control_p_lt_bonferroni": false,
+        "positive_total": true
+      },
+      "pass": false
+    },
+    "C2_donchian20_10": {
+      "checks": {
+        "sharpe_gt_bh_perp": true,
+        "dd_le_0.7x_bh_perp": false,
+        "control_p_lt_bonferroni": false,
+        "positive_total": true
+      },
+      "pass": false
+    },
+    "C3_tsmom28": {
+      "checks": {
+        "sharpe_gt_bh_perp": true,
+        "dd_le_0.7x_bh_perp": true,
+        "control_p_lt_bonferroni": false,
+        "positive_total": true
+      },
+      "pass": false
+    },
+    "C4_ensemble": {
+      "checks": {
+        "sharpe_gt_bh_perp": true,
+        "dd_le_0.7x_bh_perp": true,
+        "control_p_lt_bonferroni": false,
+        "positive_total": true
+      },
+      "pass": false
+    }
+  }
+}
