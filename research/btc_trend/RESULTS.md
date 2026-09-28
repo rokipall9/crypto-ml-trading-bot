@@ -129,3 +129,57 @@ last-hour momentum −4.63
   smallest drawdown of any positive strategy (−31 %). Noticing that in the
   holdout is itself selection, so it is only a candidate for a future
   pre-registered test, not a finding.
+
+---
+
+# Full evaluation of all twenty (`SPEC_20_FULL.md`, commit 0dfd144)
+
+Every strategy got the full treatment, not just the top five: the gate in
+three periods, a Benjamini–Hochberg adjustment across all twenty,
+robustness re-runs (costs ×2 and ×0.5, one hour later execution, 3× funding,
+two parameter neighbours each), and a 90 % block-bootstrap confidence
+interval. The parameterised re-implementation reproduces `screen20` exactly
+on the real data (`reproduces_screen20: true`), and 25 unit tests pass.
+
+**Verdicts: 0 PASS, 6 PROMISING, 14 FAIL.**
+
+| strategy | verdict | Sharpe 17–20 (p) | Sharpe 21+ (p) | 90 % CI 21+ | early 14–16 (p) | weakest robustness |
+|---|---|---|---|---|---|---|
+| T1 tsmom28 | PROMISING | 1.39 (0.076) | 0.78 (0.014) | −0.01 … 1.40 | 1.14 (0.000) | 0.41 (neighbour 21 d) |
+| T2 tsmom_multi | PROMISING | 1.73 (0.001) | 0.64 (0.036) | −0.20 … 1.26 | 1.03 (0.004) | 0.30 (high funding) |
+| T6 tsmom_multi_vt | PROMISING | 1.89 (0.003) | 0.58 (0.053) | −0.28 … 1.23 | 1.28 (0.000) | 0.22 (high funding) |
+| T3 sma200 | PROMISING | 1.49 (0.092) | 0.48 (0.162) | −0.34 … 1.12 | 0.56 (0.274) | 0.20 (high funding) |
+| D1 rsi2 | PROMISING | 0.64 (0.253) | 0.47 (0.128) | −0.09 … 1.00 | **−0.22** (0.661) | 0.37 (high funding) |
+| T4 donchian20_10 | PROMISING | 1.75 (0.004) | 0.44 (0.218) | −0.35 … 1.09 | 0.78 (0.055) | 0.17 (neighbour 15/8) |
+| T5 golden cross | FAIL | 1.41 | 0.39 | | 0.21 | |
+| D4 weekdays | FAIL | 1.04 | 0.17 | | 0.15 | −0.11 |
+| D5 turn of month | FAIL | 1.48 | 0.17 | | 0.64 | −0.02 |
+| D7 vol breakout + trend | FAIL | 1.00 | 0.05 | | — | −0.64 (costs ×2) |
+| H3 4h Bollinger | FAIL | −0.28 | 0.00 | | — | |
+| D2 panic dip | FAIL | 0.30 | −0.01 | | 0.75 | |
+| H2 4h Donchian | FAIL | 1.48 | −0.01 | | — | |
+| D3 three down | FAIL | 0.88 | −0.03 | | −0.25 | |
+| D6 vol breakout | FAIL | 1.45 | −0.14 | | — | −1.12 (costs ×2) |
+| H4 hourly RSI | FAIL | −0.55 | −0.54 | | — | |
+| H1 hourly trend | FAIL | 0.35 | −1.45 | | — | −3.20 (costs ×2) |
+| S3 US-open momentum | FAIL | 0.24 | −1.98 | | — | |
+| S1 evening | FAIL | −1.41 | −2.47 | | — | |
+| S2 last-hour momentum | FAIL | −2.47 | −4.63 | | — | |
+| buy-and-hold perp | — | 1.32 | 0.42 | | 0.30 | |
+
+## Reading it
+
+- **Nothing passes.** No holdout control survives BH across twenty (the best,
+  T1 at p = 0.014, needed ≤ 0.005), and every holdout CI still includes
+  zero. Six years of one coin cannot prove a Sharpe-0.6 edge on its own.
+- **The multi-horizon trend family has the most consistent evidence.** T2 and
+  T6 are significant in 2017–2020 (p 0.001 / 0.003) and in the unseen
+  2014–2016 (p 0.004 / 0.000), and positive in 2021+ (p 0.036 / 0.053).
+  They stay positive under every robustness re-run; their weak point is
+  funding cost.
+- **D1 rsi2 is out.** It was flagged as a candidate from the holdout. On the
+  untouched early period it loses (Sharpe −0.22), which is exactly why a
+  holdout-noticed result is not a finding.
+- **Every intraday and time-of-day strategy fails**, most of them badly
+  under doubled costs. Nothing here supports trading BTC intraday at taker
+  fees.

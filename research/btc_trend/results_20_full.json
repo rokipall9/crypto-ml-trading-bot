@@ -1,0 +1,1192 @@
+{
+  "spec_sha256": "87fc37a0ae25b3b6e6496b06b028368aece3e26960929f8054fa6cb90b221cbd",
+  "buy_hold_perp": {
+    "selection": {
+      "days": 1461,
+      "total_return": 18.3701,
+      "cagr": 1.0968,
+      "vol": 0.8184,
+      "sharpe": 1.321,
+      "max_dd": -0.8504,
+      "time_in_market": 1.0,
+      "entries_per_year": 0.2
+    },
+    "holdout": {
+      "days": 2097,
+      "total_return": 0.5428,
+      "cagr": 0.0784,
+      "vol": 0.5777,
+      "sharpe": 0.419,
+      "max_dd": -0.7921,
+      "time_in_market": 1.0,
+      "entries_per_year": 0.2
+    },
+    "early": {
+      "days": 1096,
+      "total_return": -0.0533,
+      "cagr": -0.0181,
+      "vol": 0.6562,
+      "sharpe": 0.303,
+      "max_dd": -0.8347,
+      "time_in_market": 1.0,
+      "entries_per_year": 0.3
+    }
+  },
+  "strategies": {
+    "T1_tsmom28": {
+      "selection": {
+        "days": 1461,
+        "total_return": 12.7664,
+        "cagr": 0.9254,
+        "vol": 0.6026,
+        "sharpe": 1.387,
+        "max_dd": -0.7611,
+        "time_in_market": 0.593,
+        "entries_per_year": 13.2,
+        "control_p": 0.076,
+        "gate": {
+          "sharpe_gt_bh_perp": true,
+          "dd_le_0.7x_bh_perp": false,
+          "positive_total": true
+        }
+      },
+      "holdout": {
+        "days": 2097,
+        "total_return": 2.7736,
+        "cagr": 0.2601,
+        "vol": 0.401,
+        "sharpe": 0.775,
+        "max_dd": -0.4706,
+        "time_in_market": 0.539,
+        "entries_per_year": 15.9,
+        "control_p": 0.014,
+        "sharpe_ci90": [
+          -0.014,
+          1.404
+        ],
+        "gate": {
+          "sharpe_gt_bh_perp": true,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": true
+        }
+      },
+      "robustness_holdout_sharpe": {
+        "costs_x2": 0.692,
+        "costs_x0.5": 0.816,
+        "delay_+1h": 0.859,
+        "funding_high": 0.481,
+        "neighbour_low": 0.412,
+        "neighbour_high": 0.835
+      },
+      "early": {
+        "days": 1096,
+        "total_return": 2.0492,
+        "cagr": 0.4496,
+        "vol": 0.3944,
+        "sharpe": 1.139,
+        "max_dd": -0.4199,
+        "time_in_market": 0.532,
+        "entries_per_year": 13.7,
+        "control_p": 0.0,
+        "gate": {
+          "sharpe_gt_bh_perp": true,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": true
+        }
+      },
+      "bh_significant": false,
+      "bonferroni_significant": false,
+      "verdict": "PROMISING"
+    },
+    "T2_tsmom_multi": {
+      "selection": {
+        "days": 1461,
+        "total_return": 23.4429,
+        "cagr": 1.2223,
+        "vol": 0.5477,
+        "sharpe": 1.73,
+        "max_dd": -0.6083,
+        "time_in_market": 0.897,
+        "entries_per_year": 9.5,
+        "control_p": 0.001,
+        "gate": {
+          "sharpe_gt_bh_perp": true,
+          "dd_le_0.7x_bh_perp": false,
+          "positive_total": true
+        }
+      },
+      "holdout": {
+        "days": 2097,
+        "total_return": 1.5326,
+        "cagr": 0.1756,
+        "vol": 0.3507,
+        "sharpe": 0.635,
+        "max_dd": -0.5064,
+        "time_in_market": 0.85,
+        "entries_per_year": 15.5,
+        "control_p": 0.036,
+        "sharpe_ci90": [
+          -0.202,
+          1.262
+        ],
+        "gate": {
+          "sharpe_gt_bh_perp": true,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": true
+        }
+      },
+      "robustness_holdout_sharpe": {
+        "costs_x2": 0.537,
+        "costs_x0.5": 0.683,
+        "delay_+1h": 0.679,
+        "funding_high": 0.303,
+        "neighbour_low": 0.434,
+        "neighbour_high": 0.557
+      },
+      "early": {
+        "days": 1096,
+        "total_return": 1.5261,
+        "cagr": 0.3615,
+        "vol": 0.3617,
+        "sharpe": 1.034,
+        "max_dd": -0.3613,
+        "time_in_market": 0.87,
+        "entries_per_year": 11.0,
+        "control_p": 0.004,
+        "gate": {
+          "sharpe_gt_bh_perp": true,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": true
+        }
+      },
+      "bh_significant": false,
+      "bonferroni_significant": false,
+      "verdict": "PROMISING"
+    },
+    "T3_sma200": {
+      "selection": {
+        "days": 1461,
+        "total_return": 20.1232,
+        "cagr": 1.1427,
+        "vol": 0.659,
+        "sharpe": 1.486,
+        "max_dd": -0.6808,
+        "time_in_market": 0.62,
+        "entries_per_year": 2.2,
+        "control_p": 0.092,
+        "gate": {
+          "sharpe_gt_bh_perp": true,
+          "dd_le_0.7x_bh_perp": false,
+          "positive_total": true
+        }
+      },
+      "holdout": {
+        "days": 2097,
+        "total_return": 0.9372,
+        "cagr": 0.122,
+        "vol": 0.4243,
+        "sharpe": 0.483,
+        "max_dd": -0.6601,
+        "time_in_market": 0.55,
+        "entries_per_year": 4.7,
+        "control_p": 0.162,
+        "sharpe_ci90": [
+          -0.343,
+          1.115
+        ],
+        "gate": {
+          "sharpe_gt_bh_perp": true,
+          "dd_le_0.7x_bh_perp": false,
+          "positive_total": true
+        }
+      },
+      "robustness_holdout_sharpe": {
+        "costs_x2": 0.46,
+        "costs_x0.5": 0.494,
+        "delay_+1h": 0.489,
+        "funding_high": 0.199,
+        "neighbour_low": 0.711,
+        "neighbour_high": 0.357
+      },
+      "early": {
+        "days": 1096,
+        "total_return": 0.5804,
+        "cagr": 0.1647,
+        "vol": 0.4533,
+        "sharpe": 0.564,
+        "max_dd": -0.6306,
+        "time_in_market": 0.566,
+        "entries_per_year": 3.7,
+        "control_p": 0.274,
+        "gate": {
+          "sharpe_gt_bh_perp": true,
+          "dd_le_0.7x_bh_perp": false,
+          "positive_total": true
+        }
+      },
+      "bh_significant": false,
+      "bonferroni_significant": false,
+      "verdict": "PROMISING"
+    },
+    "T4_donchian20_10": {
+      "selection": {
+        "days": 1461,
+        "total_return": 20.1183,
+        "cagr": 1.1426,
+        "vol": 0.5072,
+        "sharpe": 1.754,
+        "max_dd": -0.4701,
+        "time_in_market": 0.431,
+        "entries_per_year": 7.5,
+        "control_p": 0.004,
+        "gate": {
+          "sharpe_gt_bh_perp": true,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": true
+        }
+      },
+      "holdout": {
+        "days": 2097,
+        "total_return": 0.7259,
+        "cagr": 0.0996,
+        "vol": 0.3614,
+        "sharpe": 0.443,
+        "max_dd": -0.6058,
+        "time_in_market": 0.407,
+        "entries_per_year": 8.2,
+        "control_p": 0.218,
+        "sharpe_ci90": [
+          -0.348,
+          1.086
+        ],
+        "gate": {
+          "sharpe_gt_bh_perp": true,
+          "dd_le_0.7x_bh_perp": false,
+          "positive_total": true
+        }
+      },
+      "robustness_holdout_sharpe": {
+        "costs_x2": 0.396,
+        "costs_x0.5": 0.466,
+        "delay_+1h": 0.435,
+        "funding_high": 0.196,
+        "neighbour_low": 0.171,
+        "neighbour_high": 0.643
+      },
+      "early": {
+        "days": 1096,
+        "total_return": 0.8679,
+        "cagr": 0.2313,
+        "vol": 0.3458,
+        "sharpe": 0.775,
+        "max_dd": -0.3882,
+        "time_in_market": 0.383,
+        "entries_per_year": 5.7,
+        "control_p": 0.055,
+        "gate": {
+          "sharpe_gt_bh_perp": true,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": true
+        }
+      },
+      "bh_significant": false,
+      "bonferroni_significant": false,
+      "verdict": "PROMISING"
+    },
+    "T5_golden_cross": {
+      "selection": {
+        "days": 1461,
+        "total_return": 18.5848,
+        "cagr": 1.1026,
+        "vol": 0.7102,
+        "sharpe": 1.41,
+        "max_dd": -0.7332,
+        "time_in_market": 0.617,
+        "entries_per_year": 1.0,
+        "control_p": 0.116,
+        "gate": {
+          "sharpe_gt_bh_perp": true,
+          "dd_le_0.7x_bh_perp": false,
+          "positive_total": true
+        }
+      },
+      "holdout": {
+        "days": 2097,
+        "total_return": 0.5387,
+        "cagr": 0.0779,
+        "vol": 0.4427,
+        "sharpe": 0.389,
+        "max_dd": -0.5937,
+        "time_in_market": 0.549,
+        "entries_per_year": 1.2,
+        "control_p": 0.297,
+        "sharpe_ci90": [
+          -0.351,
+          0.952
+        ],
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": false,
+          "positive_total": true
+        }
+      },
+      "robustness_holdout_sharpe": {
+        "costs_x2": 0.384,
+        "costs_x0.5": 0.392,
+        "delay_+1h": 0.396,
+        "funding_high": 0.118,
+        "neighbour_low": 0.464,
+        "neighbour_high": 0.452
+      },
+      "early": {
+        "days": 1096,
+        "total_return": -0.0345,
+        "cagr": -0.0116,
+        "vol": 0.4673,
+        "sharpe": 0.21,
+        "max_dd": -0.743,
+        "time_in_market": 0.589,
+        "entries_per_year": 1.3,
+        "control_p": 0.439,
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": false,
+          "positive_total": false
+        }
+      },
+      "bh_significant": false,
+      "bonferroni_significant": false,
+      "verdict": "FAIL"
+    },
+    "T6_tsmom_multi_vt": {
+      "selection": {
+        "days": 1461,
+        "total_return": 12.853,
+        "cagr": 0.9284,
+        "vol": 0.3874,
+        "sharpe": 1.888,
+        "max_dd": -0.3586,
+        "time_in_market": 0.888,
+        "entries_per_year": 9.2,
+        "control_p": 0.003,
+        "gate": {
+          "sharpe_gt_bh_perp": true,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": true
+        }
+      },
+      "holdout": {
+        "days": 2097,
+        "total_return": 1.0586,
+        "cagr": 0.1339,
+        "vol": 0.2878,
+        "sharpe": 0.58,
+        "max_dd": -0.4682,
+        "time_in_market": 0.848,
+        "entries_per_year": 15.3,
+        "control_p": 0.053,
+        "sharpe_ci90": [
+          -0.28,
+          1.234
+        ],
+        "gate": {
+          "sharpe_gt_bh_perp": true,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": true
+        }
+      },
+      "robustness_holdout_sharpe": {
+        "costs_x2": 0.475,
+        "costs_x0.5": 0.632,
+        "delay_+1h": 0.623,
+        "funding_high": 0.221,
+        "neighbour_low": 0.668,
+        "neighbour_high": 0.592
+      },
+      "early": {
+        "days": 1096,
+        "total_return": 1.6936,
+        "cagr": 0.391,
+        "vol": 0.2889,
+        "sharpe": 1.285,
+        "max_dd": -0.2728,
+        "time_in_market": 0.857,
+        "entries_per_year": 9.7,
+        "control_p": 0.0,
+        "gate": {
+          "sharpe_gt_bh_perp": true,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": true
+        }
+      },
+      "bh_significant": false,
+      "bonferroni_significant": false,
+      "verdict": "PROMISING"
+    },
+    "D1_rsi2": {
+      "selection": {
+        "days": 1461,
+        "total_return": 0.8074,
+        "cagr": 0.1594,
+        "vol": 0.3083,
+        "sharpe": 0.635,
+        "max_dd": -0.314,
+        "time_in_market": 0.085,
+        "entries_per_year": 8.8,
+        "control_p": 0.253,
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": true
+        }
+      },
+      "holdout": {
+        "days": 2097,
+        "total_return": 0.5559,
+        "cagr": 0.08,
+        "vol": 0.2131,
+        "sharpe": 0.466,
+        "max_dd": -0.3055,
+        "time_in_market": 0.093,
+        "entries_per_year": 8.9,
+        "control_p": 0.128,
+        "sharpe_ci90": [
+          -0.092,
+          1.003
+        ],
+        "gate": {
+          "sharpe_gt_bh_perp": true,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": true
+        }
+      },
+      "robustness_holdout_sharpe": {
+        "costs_x2": 0.379,
+        "costs_x0.5": 0.51,
+        "delay_+1h": 0.419,
+        "funding_high": 0.371,
+        "neighbour_low": 0.451,
+        "neighbour_high": 0.407
+      },
+      "early": {
+        "days": 1096,
+        "total_return": -0.1978,
+        "cagr": -0.0708,
+        "vol": 0.2206,
+        "sharpe": -0.22,
+        "max_dd": -0.316,
+        "time_in_market": 0.085,
+        "entries_per_year": 7.7,
+        "control_p": 0.661,
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": false
+        }
+      },
+      "bh_significant": false,
+      "bonferroni_significant": false,
+      "verdict": "PROMISING"
+    },
+    "D2_panic_dip": {
+      "selection": {
+        "days": 1461,
+        "total_return": 0.1433,
+        "cagr": 0.034,
+        "vol": 0.4639,
+        "sharpe": 0.304,
+        "max_dd": -0.7146,
+        "time_in_market": 0.212,
+        "entries_per_year": 19.5,
+        "control_p": 0.679,
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": false,
+          "positive_total": true
+        }
+      },
+      "holdout": {
+        "days": 2097,
+        "total_return": -0.2151,
+        "cagr": -0.0413,
+        "vol": 0.2814,
+        "sharpe": -0.009,
+        "max_dd": -0.5537,
+        "time_in_market": 0.12,
+        "entries_per_year": 12.2,
+        "control_p": 0.537,
+        "sharpe_ci90": [
+          -0.542,
+          0.512
+        ],
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": false
+        }
+      },
+      "robustness_holdout_sharpe": {
+        "costs_x2": -0.1,
+        "costs_x0.5": 0.036,
+        "delay_+1h": -0.118,
+        "funding_high": -0.102,
+        "neighbour_low": -0.001,
+        "neighbour_high": 0.343
+      },
+      "early": {
+        "days": 1096,
+        "total_return": 0.8744,
+        "cagr": 0.2327,
+        "vol": 0.3705,
+        "sharpe": 0.749,
+        "max_dd": -0.4739,
+        "time_in_market": 0.143,
+        "entries_per_year": 15.0,
+        "control_p": 0.063,
+        "gate": {
+          "sharpe_gt_bh_perp": true,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": true
+        }
+      },
+      "bh_significant": false,
+      "bonferroni_significant": false,
+      "verdict": "FAIL"
+    },
+    "D3_three_down": {
+      "selection": {
+        "days": 1461,
+        "total_return": 1.7442,
+        "cagr": 0.2868,
+        "vol": 0.3593,
+        "sharpe": 0.878,
+        "max_dd": -0.3603,
+        "time_in_market": 0.138,
+        "entries_per_year": 7.8,
+        "control_p": 0.178,
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": true
+        }
+      },
+      "holdout": {
+        "days": 2097,
+        "total_return": -0.2076,
+        "cagr": -0.0397,
+        "vol": 0.2545,
+        "sharpe": -0.032,
+        "max_dd": -0.3188,
+        "time_in_market": 0.171,
+        "entries_per_year": 9.2,
+        "control_p": 0.617,
+        "sharpe_ci90": [
+          -0.5,
+          0.517
+        ],
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": false
+        }
+      },
+      "robustness_holdout_sharpe": {
+        "costs_x2": -0.108,
+        "costs_x0.5": 0.006,
+        "delay_+1h": 0.008,
+        "funding_high": -0.179,
+        "neighbour_low": 0.089,
+        "neighbour_high": -0.14
+      },
+      "early": {
+        "days": 1096,
+        "total_return": -0.2716,
+        "cagr": -0.1001,
+        "vol": 0.2688,
+        "sharpe": -0.254,
+        "max_dd": -0.5271,
+        "time_in_market": 0.165,
+        "entries_per_year": 8.7,
+        "control_p": 0.715,
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": false
+        }
+      },
+      "bh_significant": false,
+      "bonferroni_significant": false,
+      "verdict": "FAIL"
+    },
+    "D4_weekdays": {
+      "selection": {
+        "days": 1461,
+        "total_return": 6.143,
+        "cagr": 0.6343,
+        "vol": 0.7361,
+        "sharpe": 1.042,
+        "max_dd": -0.8598,
+        "time_in_market": 0.715,
+        "entries_per_year": 52.2,
+        "control_p": 0.319,
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": false,
+          "positive_total": true
+        }
+      },
+      "holdout": {
+        "days": 2097,
+        "total_return": -0.2532,
+        "cagr": -0.0496,
+        "vol": 0.5395,
+        "sharpe": 0.175,
+        "max_dd": -0.8043,
+        "time_in_market": 0.714,
+        "entries_per_year": 52.5,
+        "control_p": 0.369,
+        "sharpe_ci90": [
+          -0.6,
+          0.821
+        ],
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": false,
+          "positive_total": false
+        }
+      },
+      "robustness_holdout_sharpe": {
+        "costs_x2": -0.028,
+        "costs_x0.5": 0.277,
+        "delay_+1h": 0.245,
+        "funding_high": -0.114
+      },
+      "early": {
+        "days": 1096,
+        "total_return": -0.2211,
+        "cagr": -0.0798,
+        "vol": 0.5869,
+        "sharpe": 0.155,
+        "max_dd": -0.7642,
+        "time_in_market": 0.714,
+        "entries_per_year": 52.3,
+        "control_p": 0.391,
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": false,
+          "positive_total": false
+        }
+      },
+      "bh_significant": false,
+      "bonferroni_significant": false,
+      "verdict": "FAIL"
+    },
+    "D5_turn_of_month": {
+      "selection": {
+        "days": 1461,
+        "total_return": 4.4182,
+        "cagr": 0.5252,
+        "vol": 0.3183,
+        "sharpe": 1.484,
+        "max_dd": -0.247,
+        "time_in_market": 0.197,
+        "entries_per_year": 12.2,
+        "control_p": 0.078,
+        "gate": {
+          "sharpe_gt_bh_perp": true,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": true
+        }
+      },
+      "holdout": {
+        "days": 2097,
+        "total_return": 0.0754,
+        "cagr": 0.0127,
+        "vol": 0.2248,
+        "sharpe": 0.167,
+        "max_dd": -0.4758,
+        "time_in_market": 0.196,
+        "entries_per_year": 12.2,
+        "control_p": 0.388,
+        "sharpe_ci90": [
+          -0.54,
+          0.685
+        ],
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": true
+        }
+      },
+      "robustness_holdout_sharpe": {
+        "costs_x2": 0.054,
+        "costs_x0.5": 0.223,
+        "delay_+1h": -0.01,
+        "funding_high": -0.024,
+        "neighbour_low": 0.172,
+        "neighbour_high": 0.392
+      },
+      "early": {
+        "days": 1096,
+        "total_return": 0.5393,
+        "cagr": 0.1545,
+        "vol": 0.286,
+        "sharpe": 0.642,
+        "max_dd": -0.3809,
+        "time_in_market": 0.197,
+        "entries_per_year": 12.3,
+        "control_p": 0.053,
+        "gate": {
+          "sharpe_gt_bh_perp": true,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": true
+        }
+      },
+      "bh_significant": false,
+      "bonferroni_significant": false,
+      "verdict": "FAIL"
+    },
+    "D6_vol_breakout": {
+      "selection": {
+        "days": 1461,
+        "total_return": 4.8519,
+        "cagr": 0.5549,
+        "vol": 0.3458,
+        "sharpe": 1.448,
+        "max_dd": -0.3329,
+        "time_in_market": 0.157,
+        "entries_per_year": 108.5,
+        "control_p": 0.002,
+        "gate": {
+          "sharpe_gt_bh_perp": true,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": true
+        }
+      },
+      "holdout": {
+        "days": 2097,
+        "total_return": -0.3187,
+        "cagr": -0.0646,
+        "vol": 0.2491,
+        "sharpe": -0.144,
+        "max_dd": -0.5146,
+        "time_in_market": 0.158,
+        "entries_per_year": 115.9,
+        "control_p": 0.022,
+        "sharpe_ci90": [
+          -0.912,
+          0.503
+        ],
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": false
+        }
+      },
+      "robustness_holdout_sharpe": {
+        "costs_x2": -1.121,
+        "costs_x0.5": 0.344,
+        "delay_+1h": -0.242,
+        "funding_high": -0.283,
+        "neighbour_low": -0.31,
+        "neighbour_high": -0.209
+      },
+      "bh_significant": false,
+      "bonferroni_significant": false,
+      "verdict": "FAIL"
+    },
+    "D7_vol_breakout_trend": {
+      "selection": {
+        "days": 1461,
+        "total_return": 1.5055,
+        "cagr": 0.2579,
+        "vol": 0.2643,
+        "sharpe": 0.999,
+        "max_dd": -0.3222,
+        "time_in_market": 0.1,
+        "entries_per_year": 68.5,
+        "control_p": 0.005,
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": true
+        }
+      },
+      "holdout": {
+        "days": 2097,
+        "total_return": -0.0366,
+        "cagr": -0.0065,
+        "vol": 0.1806,
+        "sharpe": 0.054,
+        "max_dd": -0.4025,
+        "time_in_market": 0.082,
+        "entries_per_year": 59.8,
+        "control_p": 0.037,
+        "sharpe_ci90": [
+          -0.742,
+          0.705
+        ],
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": false
+        }
+      },
+      "robustness_holdout_sharpe": {
+        "costs_x2": -0.641,
+        "costs_x0.5": 0.401,
+        "delay_+1h": -0.047,
+        "funding_high": -0.046,
+        "neighbour_low": -0.206,
+        "neighbour_high": 0.063
+      },
+      "bh_significant": false,
+      "bonferroni_significant": false,
+      "verdict": "FAIL"
+    },
+    "H1_hourly_trend": {
+      "selection": {
+        "days": 1461,
+        "total_return": 0.2407,
+        "cagr": 0.0554,
+        "vol": 0.4886,
+        "sharpe": 0.348,
+        "max_dd": -0.7602,
+        "time_in_market": 0.36,
+        "entries_per_year": 306.2,
+        "control_p": 0.015,
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": false,
+          "positive_total": true
+        }
+      },
+      "holdout": {
+        "days": 2097,
+        "total_return": -0.9536,
+        "cagr": -0.4139,
+        "vol": 0.3309,
+        "sharpe": -1.452,
+        "max_dd": -0.9721,
+        "time_in_market": 0.321,
+        "entries_per_year": 302.9,
+        "control_p": 0.25,
+        "sharpe_ci90": [
+          -2.408,
+          -0.918
+        ],
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": false,
+          "positive_total": false
+        }
+      },
+      "robustness_holdout_sharpe": {
+        "costs_x2": -3.203,
+        "costs_x0.5": -0.508,
+        "delay_+1h": -1.535,
+        "funding_high": -1.67,
+        "neighbour_low": -1.594,
+        "neighbour_high": -1.068
+      },
+      "bh_significant": false,
+      "bonferroni_significant": false,
+      "verdict": "FAIL"
+    },
+    "H2_4h_donchian": {
+      "selection": {
+        "days": 1461,
+        "total_return": 11.4436,
+        "cagr": 0.8774,
+        "vol": 0.5113,
+        "sharpe": 1.481,
+        "max_dd": -0.5532,
+        "time_in_market": 0.434,
+        "entries_per_year": 45.5,
+        "control_p": 0.014,
+        "gate": {
+          "sharpe_gt_bh_perp": true,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": true
+        }
+      },
+      "holdout": {
+        "days": 2097,
+        "total_return": -0.3127,
+        "cagr": -0.0632,
+        "vol": 0.3469,
+        "sharpe": -0.015,
+        "max_dd": -0.6965,
+        "time_in_market": 0.373,
+        "entries_per_year": 49.5,
+        "control_p": 0.468,
+        "sharpe_ci90": [
+          -0.846,
+          0.676
+        ],
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": false,
+          "positive_total": false
+        }
+      },
+      "robustness_holdout_sharpe": {
+        "costs_x2": -0.308,
+        "costs_x0.5": 0.133,
+        "delay_+1h": 0.083,
+        "funding_high": -0.252,
+        "neighbour_low": -0.115,
+        "neighbour_high": 0.164
+      },
+      "bh_significant": false,
+      "bonferroni_significant": false,
+      "verdict": "FAIL"
+    },
+    "H3_4h_bollinger": {
+      "selection": {
+        "days": 1461,
+        "total_return": -0.3282,
+        "cagr": -0.0946,
+        "vol": 0.248,
+        "sharpe": -0.275,
+        "max_dd": -0.5214,
+        "time_in_market": 0.106,
+        "entries_per_year": 13.5,
+        "control_p": 0.873,
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": false
+        }
+      },
+      "holdout": {
+        "days": 2097,
+        "total_return": -0.109,
+        "cagr": -0.0199,
+        "vol": 0.2008,
+        "sharpe": 0.002,
+        "max_dd": -0.3532,
+        "time_in_market": 0.113,
+        "entries_per_year": 16.6,
+        "control_p": 0.418,
+        "sharpe_ci90": [
+          -0.486,
+          0.624
+        ],
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": false
+        }
+      },
+      "robustness_holdout_sharpe": {
+        "costs_x2": -0.173,
+        "costs_x0.5": 0.089,
+        "delay_+1h": 0.026,
+        "funding_high": -0.12,
+        "neighbour_low": -0.128,
+        "neighbour_high": 0.106
+      },
+      "bh_significant": false,
+      "bonferroni_significant": false,
+      "verdict": "FAIL"
+    },
+    "H4_hourly_rsi": {
+      "selection": {
+        "days": 1461,
+        "total_return": -0.1776,
+        "cagr": -0.0477,
+        "vol": 0.0826,
+        "sharpe": -0.549,
+        "max_dd": -0.2378,
+        "time_in_market": 0.007,
+        "entries_per_year": 2.0,
+        "control_p": 0.876,
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": false
+        }
+      },
+      "holdout": {
+        "days": 2097,
+        "total_return": -0.1189,
+        "cagr": -0.0218,
+        "vol": 0.0397,
+        "sharpe": -0.535,
+        "max_dd": -0.1397,
+        "time_in_market": 0.011,
+        "entries_per_year": 3.3,
+        "control_p": 0.855,
+        "sharpe_ci90": [
+          -1.052,
+          0.099
+        ],
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": false
+        }
+      },
+      "robustness_holdout_sharpe": {
+        "costs_x2": -0.708,
+        "costs_x0.5": -0.447,
+        "delay_+1h": -0.804,
+        "funding_high": -0.593,
+        "neighbour_low": -0.228,
+        "neighbour_high": -0.153
+      },
+      "bh_significant": false,
+      "bonferroni_significant": false,
+      "verdict": "FAIL"
+    },
+    "S1_evening": {
+      "selection": {
+        "days": 1461,
+        "total_return": -0.8762,
+        "cagr": -0.4066,
+        "vol": 0.3308,
+        "sharpe": -1.409,
+        "max_dd": -0.8922,
+        "time_in_market": 0.167,
+        "entries_per_year": 365.2,
+        "control_p": 0.299,
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": false,
+          "positive_total": false
+        }
+      },
+      "holdout": {
+        "days": 2097,
+        "total_return": -0.9711,
+        "cagr": -0.4604,
+        "vol": 0.2381,
+        "sharpe": -2.47,
+        "max_dd": -0.9777,
+        "time_in_market": 0.167,
+        "entries_per_year": 365.2,
+        "control_p": 0.078,
+        "sharpe_ci90": [
+          -3.331,
+          -1.99
+        ],
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": false,
+          "positive_total": false
+        }
+      },
+      "robustness_holdout_sharpe": {
+        "costs_x2": -5.694,
+        "costs_x0.5": -0.861,
+        "delay_+1h": -2.337,
+        "funding_high": -2.623,
+        "neighbour_low": -2.507,
+        "neighbour_high": -2.337
+      },
+      "bh_significant": false,
+      "bonferroni_significant": false,
+      "verdict": "FAIL"
+    },
+    "S2_last_hour_momentum": {
+      "selection": {
+        "days": 1461,
+        "total_return": -0.6875,
+        "cagr": -0.2522,
+        "vol": 0.1149,
+        "sharpe": -2.471,
+        "max_dd": -0.6893,
+        "time_in_market": 0.023,
+        "entries_per_year": 198.2,
+        "control_p": 0.19,
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": false,
+          "positive_total": false
+        }
+      },
+      "holdout": {
+        "days": 2097,
+        "total_return": -0.8574,
+        "cagr": -0.2876,
+        "vol": 0.0726,
+        "sharpe": -4.63,
+        "max_dd": -0.8718,
+        "time_in_market": 0.021,
+        "entries_per_year": 185.2,
+        "control_p": 0.555,
+        "sharpe_ci90": [
+          -5.876,
+          -3.614
+        ],
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": false,
+          "positive_total": false
+        }
+      },
+      "robustness_holdout_sharpe": {
+        "costs_x2": -9.521,
+        "costs_x0.5": -1.978,
+        "delay_+1h": -3.963,
+        "funding_high": -4.692,
+        "neighbour_low": -2.848,
+        "neighbour_high": -1.884
+      },
+      "bh_significant": false,
+      "bonferroni_significant": false,
+      "verdict": "FAIL"
+    },
+    "S3_us_open_momentum": {
+      "selection": {
+        "days": 1461,
+        "total_return": 0.121,
+        "cagr": 0.029,
+        "vol": 0.283,
+        "sharpe": 0.243,
+        "max_dd": -0.4883,
+        "time_in_market": 0.127,
+        "entries_per_year": 186.2,
+        "control_p": 0.005,
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": true,
+          "positive_total": true
+        }
+      },
+      "holdout": {
+        "days": 2097,
+        "total_return": -0.9477,
+        "cagr": -0.4017,
+        "vol": 0.2445,
+        "sharpe": -1.976,
+        "max_dd": -0.9531,
+        "time_in_market": 0.125,
+        "entries_per_year": 182.1,
+        "control_p": 0.726,
+        "sharpe_ci90": [
+          -2.628,
+          -1.297
+        ],
+        "gate": {
+          "sharpe_gt_bh_perp": false,
+          "dd_le_0.7x_bh_perp": false,
+          "positive_total": false
+        }
+      },
+      "robustness_holdout_sharpe": {
+        "costs_x2": -3.5,
+        "costs_x0.5": -1.199,
+        "delay_+1h": -2.075,
+        "funding_high": -2.086,
+        "neighbour_low": -1.998,
+        "neighbour_high": -2.339
+      },
+      "bh_significant": false,
+      "bonferroni_significant": false,
+      "verdict": "FAIL"
+    }
+  },
+  "reproduces_screen20": true
+}
