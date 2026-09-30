@@ -9,6 +9,11 @@ daily-updated file). Writes into ./data (gitignored):
   manifest.json   source URLs, sizes, sha256, integrity results
 
 Refuses to write the daily file if any integrity check fails.
+
+The update file grows daily. To rebuild the exact dataset the committed
+results were computed on, cut it at the study's last minute:
+
+  python3 fetch_data.py --force --until 2026-09-28T02:00:00Z
 """
 from __future__ import annotations
 
@@ -55,7 +60,7 @@ def download(force: bool = False) -> dict:
     return out
 
 
-def load_minutes() -> tuple[pd.DataFrame, dict]:
+def load_minutes(until: str | None = None) -> tuple[pd.DataFrame, dict]:
     hist = pd.read_csv(DATA / "hist.csv.gz")
     upd = pd.read_csv(DATA / "latest.csv")
     overlap = hist.merge(upd, on="timestamp", suffixes=("_h", "_u"))
@@ -64,6 +69,9 @@ def load_minutes() -> tuple[pd.DataFrame, dict]:
                      ).any(axis=1).sum()) if len(overlap) else 0
     df = (pd.concat([hist, upd]).drop_duplicates("timestamp", keep="last")
           .sort_values("timestamp").reset_index(drop=True))
+    if until:
+        df = df[df["timestamp"] <= pd.Timestamp(until).timestamp()] \
+            .reset_index(drop=True)
     steps = np.diff(df["timestamp"].values)
     ohlc_bad = int(((df.high < df[["open", "close"]].max(axis=1))
                     | (df.low > df[["open", "close"]].min(axis=1))
@@ -106,9 +114,14 @@ def build_daily(df: pd.DataFrame, start: str = DAILY_FROM) -> pd.DataFrame:
     return daily
 
 
+def _arg(name: str) -> str | None:
+    return sys.argv[sys.argv.index(name) + 1] if name in sys.argv else None
+
+
 def main() -> int:
     files = download(force="--force" in sys.argv)
-    df, checks = load_minutes()
+    until = _arg("--until")
+    df, checks = load_minutes(until)
     ok = (checks["non_60s_steps"] == 0 and checks["ohlc_violations"] == 0
           and checks["overlap_conflicts"] == 0)
     print(json.dumps(checks, indent=2))
@@ -116,11 +129,14 @@ def main() -> int:
         print("INTEGRITY FAILED - daily file not written")
         return 1
     df.to_pickle(DATA / "btc_1m.pkl")
+    for stale in ("btc_hourly.csv", "btc_hourly_2013.csv", "btc_daily_2013.csv"):
+        (DATA / stale).unlink(missing_ok=True)      # derived from btc_1m.pkl
     daily = build_daily(df)
     daily.to_csv(DATA / "btc_daily.csv")
     manifest = {
         "built_utc": datetime.now(timezone.utc).isoformat(),
         "sources": files,
+        "until_utc": until,
         "integrity": checks,
         "daily_rows": int(len(daily)),
         "daily_first": str(daily.index[0].date()),
