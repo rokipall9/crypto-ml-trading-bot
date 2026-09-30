@@ -1,0 +1,85 @@
+{
+  "spec_sha256": "044be586cf0d57915b0ef94f791a657473898a017220899c4fbb63b8f94f92b0",
+  "period": [
+    "2014-01-01",
+    "2016-12-31"
+  ],
+  "daily_rows": 5018,
+  "buy_hold_perp": {
+    "days": 1096,
+    "total_return": -0.0535,
+    "cagr": -0.0181,
+    "vol": 0.6564,
+    "sharpe": 0.303,
+    "max_dd": -0.8348
+  },
+  "buy_hold_perp_yearly": {
+    "2014": -0.6093,
+    "2015": 0.2057,
+    "2016": 1.0091
+  },
+  "candidates": {
+    "C3_tsmom28": {
+      "days": 1096,
+      "total_return": 2.0503,
+      "cagr": 0.4498,
+      "vol": 0.3945,
+      "sharpe": 1.139,
+      "max_dd": -0.4201,
+      "time_in_market": 0.532,
+      "avg_exposure": 0.532,
+      "round_trips": 41,
+      "trip_win_rate": 0.439,
+      "avg_win": 0.1246,
+      "avg_loss": -0.0346,
+      "yearly": {
+        "2014": -0.3478,
+        "2015": 1.0533,
+        "2016": 1.2779
+      },
+      "control": {
+        "p": 0.0,
+        "shift_sharpe_median": 0.096,
+        "shift_sharpe_p95": 0.716
+      },
+      "checks": {
+        "sharpe_gt_bh_perp": true,
+        "dd_le_0.7x_bh_perp": true,
+        "control_p_lt_bonferroni": true,
+        "positive_total": true
+      },
+      "pass": true
+    },
+    "V1_tsmom_multi": {
+      "days": 1096,
+      "total_return": 1.4827,
+      "cagr": 0.3537,
+      "vol": 0.3618,
+      "sharpe": 1.018,
+      "max_dd": -0.3727,
+      "time_in_market": 0.87,
+      "avg_exposure": 0.537,
+      "round_trips": 33,
+      "trip_win_rate": 0.242,
+      "avg_win": 0.2809,
+      "avg_loss": -0.0139,
+      "yearly": {
+        "2014": -0.1853,
+        "2015": 0.671,
+        "2016": 0.8238
+      },
+      "control": {
+        "p": 0.003,
+        "shift_sharpe_median": 0.128,
+        "shift_sharpe_p95": 0.663
+      },
+      "checks": {
+        "sharpe_gt_bh_perp": true,
+        "dd_le_0.7x_bh_perp": true,
+        "control_p_lt_bonferroni": true,
+        "positive_total": true
+      },
+      "pass": true
+    }
+  }
+}
